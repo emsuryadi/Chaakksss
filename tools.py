@@ -1,3 +1,4 @@
+from flask import flash
 from datetime import datetime
 from operator import itemgetter
 from json import dumps
@@ -63,6 +64,11 @@ class Tools():
 		# Set
 		content["user"] = user
 		content["data"] = self.parse_data(content_data)
+
+		# Check
+		if not content["user"] or not content["data"]:
+			flash("Terjadi kesalahan saat memproses teks, pastikan anda mengikuti perintah diatas.", "error")
+			return None
 
 		# End
 		return content
