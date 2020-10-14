@@ -1,5 +1,6 @@
-from flask import Flask, escape, request, render_template, send_file
+from flask import Flask, escape, request, render_template, send_file, redirect, url_for
 from tools import Tools
+from random import randrange
 
 # Create app instance
 app = Flask(__name__)
@@ -12,17 +13,16 @@ tools = Tools()
 def index():
 	# Check if on POST method
 	if request.method == "POST":
-		# Get content & parse
+		# Get content & create PDF file
 		content = tools.parse_content(request.form.get("content"))
-
-		# Add to log
-		tools.add_to_log(content)
-
-		# Create PDF file
 		pdf_file = tools.create_pdf(content)
 
-		# Send file
-		return "OK" # send_file
+		# Redirect to download page
+		return redirect(url_for('download', filename=pdf_file, r=str(randrange(1000, 9999))))
 
 	# Render template
 	return render_template("index.html")
+
+@app.route('/download/<filename>', methods=["POST", "GET"])
+def download(filename):
+	return send_file(tools.get_pdf_file(filename), as_attachment=True)
