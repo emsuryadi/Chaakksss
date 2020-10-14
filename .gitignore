@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 
 example.txt
+data/*
+!data/.dummy
 
 # C extensions
 *.so
