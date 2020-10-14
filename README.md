@@ -11,6 +11,8 @@ Tools untuk auto-rekap jadwal kuliah SWU ke PDF, menggunakan python + flask + py
 ### Development
 
 - Python 3.6+
-- Create python virtual environment
-- Install `requirements.txt`
+- Create python virtual environment `virtualenv env` or `virtualenv -p python3 env`
+- Activate virtual environment `source env/bin/activate`
+- Install `pip3 install -r requirements.txt`
 - Run server `python3 run.py 8081`
+- To turn off virtual environment `deactivate`
