@@ -15,7 +15,7 @@
 			</header>
 			<div id="main">
 				<div id="content" class="main" style="padding:1rem;margin-bottom: 2rem;">
-					<ol style="margin: 0;margin-bottom:1rem;">
+					<ol style="margin: 0;margin-bottom:.5rem;">
 						<li>
 							Buka mySWU via browser HP <b>(Chrome Android)</b>. <a href="http://www.smartone.smart-service.co.id/swu.php" target="_blank">Klik Disini.</a>
 						</li>
@@ -28,7 +28,13 @@
 						<li>
 							<b>Paste / Tempel</b> teks yang disalin ke kolom dibawah ini.
 						</li>
+						<li>
+							Tekan tombol <i>Download &amp; Proses PDF.</i>
+						</li>
 					</ol>
+					<div style="padding-bottom:1rem;">
+						Masih bingung? <a href="{{ url_for('static', filename='tutorial.mp4')}}"><b>Lihat Video Tutorial.</b></a>
+					</div>
 					<form method="POST" style="margin:0;">
 						{% with messages = get_flashed_messages(category_filter=["error"]) %}
 							{% if messages %}
@@ -39,7 +45,7 @@
 								</div>
 							{% endif %}
 						{% endwith %}
-						<textarea name="content" placeholder="Paste disini beb :)" style="min-height:35vh;font-size:1rem;margin-bottom:1rem;"></textarea>
+						<textarea name="content" placeholder="Paste disini beb :)" style="min-height:25vh;font-size:1rem;margin-bottom:1rem;"></textarea>
 						<button type="submit" style="border: 1px solid #935d8c;background-color: white;color:#935d8c !important;border-radius:0.25rem;font-size:.95rem;font-weight: bold;">
 							Proses & Download PDF
 						</button>
