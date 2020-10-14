@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Chaakksss - Parsing jadwal kuliah SWU ke PDF</title>
+		<title>Chaakksss - Auto-rekap jadwal kuliah SWU ke PDF</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
@@ -10,12 +10,12 @@
 	<body class="is-preload" style="min-height: 100vh;">
 		<div id="wrapper">
 			<header id="header" style="padding: 2em 2.5em 1em 2.5em;">
-				<h1>Chaakksss</h1>
-				<p style="color: #fff;margin-bottom:1rem;">Tools untuk parsing jadwal kuliah SWU ke PDF</p>
+				<a href="/"><h1>Chaakksss</h1></a>
+				<p style="color: #fff;margin-bottom:1rem;">Auto-rekap jadwal kuliah SWU ke PDF</p>
 			</header>
 			<div id="main">
 				<div id="content" class="main" style="padding:1rem;margin-bottom: 2rem;">
-					<ol style="margin: 0;margin-bottom:1rem;">
+					<ol style="margin: 0;margin-bottom:.5rem;">
 						<li>
 							Buka mySWU via browser HP <b>(Chrome Android)</b>. <a href="http://www.smartone.smart-service.co.id/swu.php" target="_blank">Klik Disini.</a>
 						</li>
@@ -23,14 +23,29 @@
 							Login, kemudian masuk ke menu <i>Jadwal Kuliah</i>.
 						</li>
 						<li>
-							Tekan dan tahan, kemudian <b>Select All / Pilih Semau</b>, lalu <b>Copy / Salin</b>
+							Tekan dan tahan, kemudian <b>Select All / Pilih Semua</b>, lalu <b>Copy / Salin</b>
 						</li>
 						<li>
 							<b>Paste / Tempel</b> teks yang disalin ke kolom dibawah ini.
 						</li>
+						<li>
+							Tekan tombol <i>Download &amp; Proses PDF.</i>
+						</li>
 					</ol>
+					<div style="padding-bottom:1rem;">
+						Masih bingung? <a href="{{ url_for('static', filename='tutorial.mp4')}}"><b>Lihat Video Tutorial.</b></a>
+					</div>
 					<form method="POST" style="margin:0;">
-						<textarea name="content" placeholder="Paste disini beb :)" style="min-height:35vh;font-size:1rem;margin-bottom:1rem;"></textarea>
+						{% with messages = get_flashed_messages(category_filter=["error"]) %}
+							{% if messages %}
+								<div style="padding-bottom:.5rem;color:crimson;">
+									{% for i in messages %}
+										{{ i|safe }}{% if not loop.last %}, {% endif %}
+									{% endfor %}
+								</div>
+							{% endif %}
+						{% endwith %}
+						<textarea name="content" placeholder="Paste disini beb :)" style="min-height:25vh;font-size:1rem;margin-bottom:1rem;"></textarea>
 						<button type="submit" style="border: 1px solid #935d8c;background-color: white;color:#935d8c !important;border-radius:0.25rem;font-size:.95rem;font-weight: bold;">
 							Proses & Download PDF
 						</button>
