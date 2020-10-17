@@ -9,6 +9,7 @@ from fpdf import FPDF
 class Tools():
 	def __init__(self):
 		self.base_path = path.abspath(path.dirname(__file__))
+		self.separator = "$"
 		self.months = {
 			1: "Januari",
 			2: "Februari",
@@ -49,12 +50,12 @@ class Tools():
 		# Split by line
 		for i in content_raw.splitlines():
 			if i:
-				if "STI" in i:
+				if "STI20" in i or "DKA20" in i:
 					user = i
 				elif user and not "PERKULIAHAN:" in i:
 					# Check if matkul
 					if not "\t" in i:
-						ii = "#%s" % (i)
+						ii = "%s%s" % (self.separator, i.split("#")[0].strip())
 					else:
 						ii = i.replace(" \t", "|").replace("\t", "|").replace(" | ", "|")
 					content_data_container.append(ii)
@@ -78,7 +79,7 @@ class Tools():
 		jadwal = []
 		jadwal_date_list = []
 		jadwal_date_list_txt = {}
-		for matkul_group in content_data.split("#"):
+		for matkul_group in content_data.split(self.separator):
 			# Clean extra white space
 			matkul_group = matkul_group.strip()
 			# Check and loop
