@@ -50,7 +50,7 @@ class Tools():
 		# Split by line
 		for i in content_raw.splitlines():
 			if i:
-				if "STI" in i:
+				if "STI20" in i or "DKA20" in i:
 					user = i
 				elif user and not "PERKULIAHAN:" in i:
 					# Check if matkul
